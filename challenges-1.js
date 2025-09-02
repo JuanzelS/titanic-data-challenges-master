@@ -67,25 +67,27 @@ const getSurvivorCountForClass = (data, pclass) => {
 // the number of passengers who did not survive for that class. 
 
 const getCasualityCountForClass = (data, pclass) => {
-	return 0
-}
+	return data.filter(p => p.fields.pclass === pclass && p.fields.survived === "No").length
+  }
 
 // 7 ---------------------------------------------------------------
 // Return the age of the youngest passenger. You need to filter
 // passenger data where the age is missing. 
 
 const getMinAge = (data) => {
-	return 0
-}
+	const ages = data.map(p => p.fields.age).filter(age => age !== undefined)
+	return Math.min(...ages)
+  }
+  
 
 // 8 ---------------------------------------------------------------
 // Return the age of the oldest passenger. Filter passengers where 
 // age is missing.
 
 const getMaxAge = (data) => {
-	return 0
-}
-
+	const ages = data.map(p => p.fields.age).filter(age => age !== undefined)
+	return Math.max(...ages)
+  }
 // 9 ---------------------------------------------------------------
 // Return the number of passengers that embarked at a given stop. 
 // Each passenger has a embarked property with a value of: S, C,
@@ -93,16 +95,17 @@ const getMaxAge = (data) => {
 // embarkation code. Return the count of passenegers with that code.
 
 const getEmbarkedCount = (data, embarked) => {
-	return 0
-}
+	return data.filter(p => p.fields.embarked === embarked).length
+  }
 
 // 10 ---------------------------------------------------------------
 // Return the lowest fair paid by any passenger. The fare is missing 
 // for some passengers you'll need to filter this out!
 
 const getMinFare = (data) => {
-	return -1
-}
+	const fares = data.map(p => p.fields.fare).filter(fare => fare !== undefined)
+	return Math.min(...fares)
+  }
 
 // 11 ---------------------------------------------------------------
 // Return the highest fare paid by any passenger. Some of the 
