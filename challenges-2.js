@@ -25,9 +25,8 @@
 // Or if property = 'age' -> [40, 26, 22, 28, 23, 45, 21, ...]
 
 const getAllValuesForProperty = (data, property) => {
-	return []
-}
-
+	return data.map(p => p.fields[property])
+  }
 // 2 -------------------------------------------------------------
 // Return an array where a given property matches the given value
 // For example property = 'sex' and value = 'male' returns an 
@@ -36,8 +35,8 @@ const getAllValuesForProperty = (data, property) => {
 // that patch the property and value. 
 
 const filterByProperty = (data, property, value) => {
-	return []
-}
+	return data.filter(p => p.fields[property] === value)
+  }
 
 // 3 -------------------------------------------------------------
 // Filter out missing values
@@ -45,8 +44,8 @@ const filterByProperty = (data, property, value) => {
 // given property have been removed
 
 const filterNullForProperty = (data, property) => {
-	return []
-}
+	return data.filter(p => p.fields[property] !== undefined)
+  }
 
 // 4 -------------------------------------------------------------
 // Abstract the sum by creating a function that returns the sum 
