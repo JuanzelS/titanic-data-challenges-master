@@ -123,8 +123,10 @@ const makeHistogram = (data, property, step) => {
 // to divide each value by the maximum value in the array.
 
 const normalizeProperty = (data, property) => {
-	return []
-}
+	const values = data.map(p => p.fields[property]).filter(v => v !== undefined)
+	const max = Math.max(...values)
+	return values.map(v => v / max)
+  }
 
 // Normalizing is an important process that can make many other
 // operations easier. Normalizing allows you to take numbers in one 
@@ -143,8 +145,9 @@ const normalizeProperty = (data, property) => {
 // would return ['male', 'female']
 
 const getUniqueValues = (data, property) => {
-	return []
-}
+	const values = data.map(p => p.fields[property])
+	return [...new Set(values)]
+  }
 
 // There are a couple ways to do this. 
 // Use an object and add each value as a key. The value can be anything. 
