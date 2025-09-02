@@ -54,8 +54,11 @@ const filterNullForProperty = (data, property) => {
 // You need to remove any missing values because n + undefined = NaN!
 
 const sumAllProperty = (data, property) => {
-	return 0
-}
+	return data
+	  .map(p => p.fields[property])
+	  .filter(v => v !== undefined)
+	  .reduce((acc, v) => acc + v, 0)
+  }
 
 
 // 5 -------------------------------------------------------------
@@ -69,8 +72,12 @@ const sumAllProperty = (data, property) => {
 // at Cherbourg, 77 emabrked at Queenstown, and 2 are undedfined
 
 const countAllProperty = (data, property) => {
-	return {}
-}
+	return data.reduce((acc, p) => {
+	  const val = p.fields[property]
+	  acc[val] = (acc[val] || 0) + 1
+	  return acc
+	}, {})
+  }
 
 // Use reduce with an object as the starting accumulator! 
 
@@ -84,8 +91,20 @@ const countAllProperty = (data, property) => {
 // ages 0 - 10, 10 - 20, 20 - 30 etc. 
 
 const makeHistogram = (data, property, step) => {
-	return []
-}
+	const values = data.map(p => p.fields[property]).filter(v => v !== undefined)
+	if (values.length === 0) return []
+  
+	const max = Math.max(...values)
+	const bucketCount = Math.ceil(max / step)
+	const histogram = new Array(bucketCount).fill(0)
+  
+	values.forEach(v => {
+	  const bucket = Math.floor(v / step)
+	  histogram[bucket]++
+	})
+  
+	return histogram
+  }
 
 // Note! There may not be no values for a particular step. For example
 // if we get passenger ages in increments of 5 there are 0 passengers in the 
