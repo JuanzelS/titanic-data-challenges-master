@@ -22,8 +22,8 @@
 // Returns a number.
 
 const getTotalPassengers = (data) => {
-	return 0
-}
+	return data.length
+  }
 
 // 2 ---------------------------------------------------------------
 // Return the number of surviving passengers. A passenger survived 
@@ -31,8 +31,8 @@ const getTotalPassengers = (data) => {
 // Return a number.
 
 const getSurvivorCount = (data) => {
-	return 0
-}
+	return data.filter(p => p.fields.survived === "Yes").length
+  }
 
 // 3 ---------------------------------------------------------------
 // Return the number of passengers who did not survive. A passenger
@@ -40,8 +40,8 @@ const getSurvivorCount = (data) => {
 // Return a number.
 
 const getCasualityCount = (data) => {
-	return 0
-}
+	return data.filter(p => p.fields.survived === "No").length
+  }
 
 // 4 ---------------------------------------------------------------
 // Return the number of passengers in any class. This function 
@@ -50,17 +50,16 @@ const getCasualityCount = (data) => {
 // Return a number
 
 const countPassengersInClass = (data, pclass) => {
-	return 0
-}
-
+	return data.filter(p => p.fields.pclass === pclass).length
+  }
 // 5 ---------------------------------------------------------------
 // Return the number of survivors in a class. This function takes 
 // the data and passenger class. 
 // Return the count of survivors in that pclass.
 
 const getSurvivorCountForClass = (data, pclass) => {
-	return 0
-}
+	return data.filter(p => p.fields.pclass === pclass && p.fields.survived === "Yes").length
+  }
 
 // 6 ---------------------------------------------------------------
 // Return the number of passengers who did not survive in a class.
