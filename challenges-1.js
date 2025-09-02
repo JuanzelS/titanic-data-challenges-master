@@ -112,32 +112,32 @@ const getMinFare = (data) => {
 // passengers are missing data for fare. Be sure to filter these! 
 
 const getMaxFare = (data) => {
-	return 0
-}
+	const fares = data.map(p => p.fields.fare).filter(fare => fare !== undefined)
+	return Math.max(...fares)
+  }
+  
 
 // 12 ---------------------------------------------------------------
 // Return the count of passengers by gender. Each passenger object has
 // "sex" property that is either "male" or "female"
 
 const getPassengersByGender = (data, gender) => {
-	return 0
-}
-
+	return data.filter(p => p.fields.sex === gender).length
+  }
 // 13 ---------------------------------------------------------------
 // Return the number of passengers who survived by gender. This 
 // function receives parameters of data and gender. Match the gender
 // to the "sex" property and check the "survived" property. 
 
 const getSurvivorsByGender = (data, gender) => {
-	return 0
-}
-
+	return data.filter(p => p.fields.sex === gender && p.fields.survived === "Yes").length
+  }
 // 14 ---------------------------------------------------------------
 // Return the number of passengers who did not survived by gender. 
 
 const getCasualitiesByGender = (data, gender) => {
-	return 0
-}
+	return data.filter(p => p.fields.sex === gender && p.fields.survived === "No").length
+  }
 
 // 15 --------------------------------------------------------------
 // Return the total of all fares paid. Add up all of the fares and 
@@ -145,8 +145,12 @@ const getCasualitiesByGender = (data, gender) => {
 // where the fare is missing! 
 
 const getTotalFare = (data) => {
-	return 0
-}
+	return data
+	  .map(p => p.fields.fare)
+	  .filter(fare => fare !== undefined)
+	  .reduce((acc, fare) => acc + fare, 0)
+  }
+  
 
 // 16 --------------------------------------------------------------
 // Return the average fare paid. Add up all of the fares and divide 
@@ -154,8 +158,10 @@ const getTotalFare = (data) => {
 // missing a fare! 
 
 const getAverageFare = (data) => {
-	return 0
-}
+	const fares = data.map(p => p.fields.fare).filter(f => f !== undefined)
+	const total = fares.reduce((acc, f) => acc + f, 0)
+	return total / fares.length
+  }
 
 // 17 --------------------------------------------------------------
 // Return the median fare. The median is the value equal distance
@@ -166,33 +172,41 @@ const getAverageFare = (data) => {
 // 4 + 5 = 9 / 2 median is 4.5!
 
 const getMedianFare = (data) => {
-	return 0
-}
-
+	const fares = data.map(p => p.fields.fare).filter(f => f !== undefined).sort((a, b) => a - b)
+	const mid = Math.floor(fares.length / 2)
+	return fares.length % 2 !== 0 ? fares[mid] : (fares[mid - 1] + fares[mid]) / 2
+  }
+  
 // 18 --------------------------------------------------------------
 // Return the average age of all passengers. Add all ages and divide 
 // by the number of passenegers. Be sure to filter where ages are not 
 // available. 
 
 const getAverageAge = (data) => {
-	return 0
-}
-
+	const ages = data.map(p => p.fields.age).filter(a => a !== undefined)
+	const total = ages.reduce((acc, a) => acc + a, 0)
+	return total / ages.length
+  }
 // 19 --------------------------------------------------------------
 // Return the median age from passengers.
 
 const getMedianAge = (data) => {
-	return 0
-}
+	const ages = data.map(p => p.fields.age).filter(a => a !== undefined).sort((a, b) => a - b)
+	const mid = Math.floor(ages.length / 2)
+	return ages.length % 2 !== 0 ? ages[mid] : (ages[mid - 1] + ages[mid]) / 2
+  }
+  
 
 // 20 --------------------------------------------------------------
 // Add up all of the ages for the gender provided and divide by the 
 // the total number. 
 
 const getAverageAgeByGender = (data, gender) => {
-	return 0
-}
-
+	const ages = data.filter(p => p.fields.sex === gender && p.fields.age !== undefined).map(p => p.fields.age)
+	const total = ages.reduce((acc, a) => acc + a, 0)
+	return total / ages.length
+  }
+  
 // --------------------------------------------------------------
 // --------------------------------------------------------------
 module.exports = {
